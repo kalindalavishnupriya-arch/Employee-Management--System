@@ -116,8 +116,6 @@ A ready‑to‑import Postman collection is included to test the API endpoints.
 ### Login Page
 ![LoginScreenshot](login.png)
 
-### Dashboard (Employee Overview)
-*(Replace with your own screenshot if desired)*
 
 ---
 
