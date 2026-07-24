@@ -1,49 +1,50 @@
-version: '3.8'
+version: "3.9"
 
 services:
+  # -------------------------------------------------
+  # MySQL database
+  # -------------------------------------------------
   mysql:
     image: mysql:8.0
-    container_name: sempms_mysql
+    container_name: sempms-mysql
+    restart: unless-stopped
     environment:
-      MYSQL_DATABASE: sempms
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: example          # matches the password used in the Dockerfile
+      MYSQL_DATABASE: smart_employee_mgmt
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      # Initialise DB schema & seed data on first start
+      - ./db_setup.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pexample"]
+      interval: 30s
       timeout: 5s
-      retries: 5
+      retries: 3
 
+  # -------------------------------------------------
+  # Backend Spring Boot application
+  # -------------------------------------------------
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: sempms_backend
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sempms?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+    image: sempms-backend:latest
+    container_name: sempms-backend
+    restart: unless-stopped
     depends_on:
       mysql:
         condition: service_healthy
-    volumes:
-      - upload_data:/app/uploads
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: sempms_frontend
+    environment:
+      # These values override the defaults if you want to change them at runtime
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/smart_employee_mgmt
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: example
     ports:
-      - "80:80"
-    depends_on:
-      - backend
-
-volumes:
-  mysql_data:
-  upload_data:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
