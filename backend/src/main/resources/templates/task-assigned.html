@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
+        .card { max-width: 550px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .header { text-align: center; border-bottom: 2px solid #6366f1; padding-bottom: 15px; margin-bottom: 20px; }
+        .header h2 { color: #6366f1; margin: 0; }
+        .content { color: #334155; font-size: 15px; line-height: 1.6; }
+        .details-box { background: #f8fafc; border-left: 4px solid #6366f1; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .footer { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 25px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h2>Smart Management System</h2>
+        </div>
+        <div class="content">
+            <p>Hello <strong th:text="${employeeName}">Employee</strong>,</p>
+            <p>You have been assigned a new task in the Smart Employee & Project Management System:</p>
+            
+            <div class="details-box">
+                <p><strong>Task Title:</strong> <span th:text="${taskTitle}">Task Title</span></p>
+                <p><strong>Project:</strong> <span th:text="${projectName}">Project Name</span></p>
+                <p><strong>Due Date:</strong> <span th:text="${dueDate}">Due Date</span></p>
+            </div>
+
+            <p>Please log in to your portal to review and update progress.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 Smart Employee & Project Management System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

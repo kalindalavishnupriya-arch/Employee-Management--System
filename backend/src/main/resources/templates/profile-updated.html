@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
+        .card { max-width: 550px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .header { text-align: center; border-bottom: 2px solid #6366f1; padding-bottom: 15px; margin-bottom: 20px; }
+        .header h2 { color: #6366f1; margin: 0; }
+        .content { color: #334155; font-size: 15px; line-height: 1.6; }
+        .details-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .footer { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 25px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h2>📷 Profile Picture & Details Updated</h2>
+        </div>
+        <div class="content">
+            <p>Hello <strong th:text="${fullName}">Employee</strong>,</p>
+            <p>Your profile information / profile picture in the Smart Employee &amp; Project Management System has been successfully updated.</p>
+
+            <div class="details-box">
+                <p>If you did not make this change, please contact your system administrator immediately.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© 2026 Smart Employee &amp; Project Management System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

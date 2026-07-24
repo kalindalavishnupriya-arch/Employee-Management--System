@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
+        .card { max-width: 550px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .header { text-align: center; border-bottom: 2px solid #ef4444; padding-bottom: 15px; margin-bottom: 20px; }
+        .header h2 { color: #ef4444; margin: 0; }
+        .content { color: #334155; font-size: 15px; line-height: 1.6; }
+        .details-box { background: #fffbebfb; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .footer { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 25px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h2>⏰ Approaching Project Deadline Warning</h2>
+        </div>
+        <div class="content">
+            <p>Hello <strong th:text="${recipientName}">Team Member</strong>,</p>
+            <p>This is an automated alert to notify you that an upcoming project deadline is approaching soon.</p>
+
+            <div class="details-box">
+                <p><strong>Project Name:</strong> <span th:text="${projectName}">Project Title</span></p>
+                <p><strong>Deadline Date:</strong> <span th:text="${deadline}">2026-07-30</span></p>
+                <p><strong>Current Status:</strong> <span th:text="${status}">IN_PROGRESS</span></p>
+            </div>
+
+            <p>Please review pending tasks and complete remaining milestone deliverables before the deadline.</p>
+        </div>
+        <div class="footer">
+            <p>© 2026 Smart Employee &amp; Project Management System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
